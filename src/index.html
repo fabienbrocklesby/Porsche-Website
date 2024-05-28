@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porsche</title>
+
+  <link rel="stylesheet" href="./output.css">
+</head>
+
+<body>
+  <div class="w-full h-screen flex justify-center items-center">
+    <img src="./assets/img/porsche-model.png" class="w-1/2" id="animatedImage">
+  </div>
+
+  <script>
+    window.onload = function () {
+      const image = document.getElementById('animatedImage');
+      image.animate([
+        { transform: 'translateX(-100vw)' },
+        { transform: 'translateX(0)' }
+      ], {
+        duration: 2000,
+        easing: 'ease-out'
+      });
+    };
+  </script>
+</body>
+
+</html>
