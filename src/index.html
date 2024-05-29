@@ -6,23 +6,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Porsche</title>
 
-  <link rel="stylesheet" href="./output.css">
+  <link rel="stylesheet" href="./assets/css/tailwind/output.css">
 </head>
 
 <body>
   <div class="w-full h-screen flex justify-center items-center">
-    <img src="./assets/img/porsche-model.png" class="w-1/2" id="animatedImage">
+    <div class="car-container">
+      <img id="wheel1" src="./assets/img/graphics/porsche-wheel.png">
+      <img id="carBody" src="./assets/img/graphics/porsche.png">
+      <img id="wheel2" src="./assets/img/graphics/porsche-wheel.png">
+    </div>
   </div>
+
+  <style>
+    .car-container {
+      position: relative;
+      width: 50%;
+      margin: auto;
+    }
+
+    #carBody {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    #wheel1 {
+      position: absolute;
+      width: 29%;
+      bottom: 4.75%;
+      right: 61%;
+      z-index: 2;
+    }
+
+    #wheel2 {
+      position: absolute;
+      width: 29%;
+      bottom: 3.5%;
+      right: 8%;
+      z-index: 2;
+      transform: rotate(90deg);
+      transform-origin: center;
+    }
+
+    .car-container {
+      position: relative;
+      width: 50%;
+      margin: auto;
+      animation: driveIn 2s forwards;
+      animation-timing-function: ease-out;
+    }
+
+    @keyframes driveIn {
+      from {
+        transform: translateX(-100%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+  </style>
 
   <script>
     window.onload = function () {
-      const image = document.getElementById('animatedImage');
-      image.animate([
-        { transform: 'translateX(-100vw)' },
+      const car = document.querySelector('.car-container');
+      const carBody = document.getElementById('carBody');
+      const wheel1 = document.getElementById('wheel1');
+      const wheel2 = document.getElementById('wheel2');
+
+      const driveInAnimation = [
+        { transform: 'translateX(-100%)' },
         { transform: 'translateX(0)' }
-      ], {
+      ];
+
+      const shakeAnimation = [
+        { transform: 'translateY(0)' },
+        { transform: 'translateY(-1px)' },
+        { transform: 'translateY(0)' }
+      ];
+
+      const wheel1Animation = [
+        { transform: 'rotate(0deg)' },
+        { transform: 'rotate(360deg)' }
+      ];
+
+      const wheel2Animation = [
+        { transform: 'rotate(90deg)' },
+        { transform: 'rotate(450deg)' }
+      ];
+
+      const driveInOptions = {
         duration: 2000,
+        iterations: 1,
         easing: 'ease-out'
+      };
+
+      const shakeOptions = {
+        duration: 200,
+        iterations: Infinity,
+        easing: 'linear'
+      };
+
+      const wheelOptions = {
+        duration: 2000,
+        iterations: 1,
+        easing: 'ease-out'
+      };
+
+      const driveInPlayer = car.animate(driveInAnimation, driveInOptions);
+      wheel1.animate(wheel1Animation, wheelOptions);
+      wheel2.animate(wheel2Animation, wheelOptions);
+
+      driveInPlayer.finished.then(() => {
+        carBody.animate(shakeAnimation, shakeOptions);
       });
     };
   </script>
