@@ -7,22 +7,28 @@
   <title>Porsche</title>
 
   <link rel="stylesheet" href="./assets/css/tailwind/output.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-  <div class="w-full h-screen flex justify-center items-center">
+  <div class="w-full h-screen flex justify-center items-center flex-col">
     <img id="logo" src="./assets/img/porsche.png" alt="Porsche Logo">
     <div class="car-container">
       <img id="wheel1" src="./assets/img/graphics/porsche-wheel.png">
       <img id="carBody" src="./assets/img/graphics/porsche.png">
       <img id="wheel2" src="./assets/img/graphics/porsche-wheel.png">
     </div>
+    <div class="button-container mt-4">
+      <button class="bg-transparent text-red-500 font-bold border-red-500 border-4 p-3 rounded-3xl m-8">Under The
+        Hood</button>
+    </div>
   </div>
+
 
   <style>
     #logo {
       position: absolute;
-      top: 25%;
+      top: 22.5%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 20em;
@@ -58,6 +64,16 @@
         width: 15em;
       }
     }
+
+    .button-container {
+      position: absolute;
+      z-index: 3;
+      bottom: 2%;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      animation-delay: 2s;
+    }
+
 
     @keyframes fadeIn {
       from {
